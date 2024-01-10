@@ -1,15 +1,5 @@
-import websocket
-import os
-from confluent_kafka import Producer
-
-producer_conf = {
-    "bootstrap.servers":"localhost:9092"
-}
-producer = Producer(producer_conf)
-
-# kafka-topics --bootstrap-server broker:29092 --create --topic HelloWorld --if-not-exists --replication-factor 1 --partition 1
-
 #https://pypi.org/project/websocket_client/
+import websocket
 
 def on_message(ws, message):
     print(message)
@@ -34,8 +24,4 @@ if __name__ == "__main__":
                               on_close = on_close)
     ws.on_open = on_open
     ws.run_forever()
-
-
-producer.produce(topic='Delivery', key=msg['Type'], value=str(msg), callback=acked)
-producer.poll(1)
 
